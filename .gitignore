@@ -1,0 +1,40 @@
+# Файлы базы данных
+*.db
+*.sqlite
+*.sqlite3
+
+# Временные файлы
+*.tmp
+*.bak
+*.swp
+
+# Логи
+*.log
+
+# Скомпилированный код
+*.o
+*.class
+
+# Зависимости
+/vendor/
+/node_modules/
+
+# Сгенерированные файлы
+/public/build/
+/dist/
+
+# IDE и редакторы
+.idea/
+.vscode/
+*.iml
+
+# Секреты и ключи
+.env
+*.key
+*.pem
+
+# Операционная система
+.DS_Store
+Thumbs.db
+
+venv
