@@ -848,4 +848,31 @@ console.log('%c Proudly Crafted with ZiOn.', 'background: #222; color: #bada55')
     });
 })(jQuery);
 
+/**
+ * Подсветка активного пункта меню при клике (только подчеркивание, без смены цвета)
+ * Работает для меню с классом .navbar-nav > li > a
+ */
+document.addEventListener('DOMContentLoaded', function() {
+    var navLinks = document.querySelectorAll('.navbar-nav > li > a');
+    navLinks.forEach(function(link) {
+      link.addEventListener('click', function() {
+        navLinks.forEach(function(l) {
+          l.classList.remove('active');
+        });
+        this.classList.add('active');
+      });
+    });
+  });
 
+  // Плавный скролл к якорю после перехода на главную с внутренней страницы
+document.addEventListener('DOMContentLoaded', function() {
+    if (window.location.hash && window.location.pathname.indexOf('index_mp_fullscreen_flexslider') !== -1) {
+      setTimeout(function() {
+        var el = document.querySelector(window.location.hash);
+        if (el) {
+          window.scrollTo({ top: el.offsetTop - 50, behavior: "smooth" });
+        }
+      }, 600); // подождать, пока исчезнет preloader
+    }
+  });
+  

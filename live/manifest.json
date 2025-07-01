@@ -1,0 +1,8 @@
+{
+    "name": "Titan",
+    "short_name": "Titan",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#ffffff",
+    "description": "Multipurpose HTML5 Template"
+  }

@@ -2925,3 +2925,13 @@ Google map
     width: 100%;
   }
 }
+
+/* Подсветка активного пункта меню — только подчеркивание, без смены цвета */
+.navbar-nav > li > a.active,
+.navbar-nav > li.active > a {
+  border-bottom: 2px solid #fff;
+  color: inherit !important;
+  background: none !important;
+  font-weight: 600;
+  transition: border-bottom 0.2s;
+}
