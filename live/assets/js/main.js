@@ -865,12 +865,26 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   // Плавный скролл к якорю после перехода на главную с внутренней страницы
-document.addEventListener('DOMContentLoaded', function() {
+  document.addEventListener('DOMContentLoaded', function() {
     if (window.location.hash && window.location.pathname.indexOf('index_mp_fullscreen_flexslider') !== -1) {
       setTimeout(function() {
-        var el = document.querySelector(window.location.hash);
+        var hash = window.location.hash.replace('#', '');
+        // Ищем только section с нужным id (исключаем дублирование id у других элементов)
+        var sections = document.querySelectorAll('section');
+        var el = null;
+        sections.forEach(function(section) {
+          if (section.id === hash) {
+            el = section;
+          }
+        });
+        // Если нашли — скроллим к нему
         if (el) {
-          window.scrollTo({ top: el.offsetTop - 50, behavior: "smooth" });
+          // Исправление: если это последняя секция (например, контакты), скроллим к низу этой секции, а не всей страницы
+          var sectionBottom = el.offsetTop + el.offsetHeight;
+          var maxScroll = document.body.scrollHeight - window.innerHeight;
+          var scrollTo = Math.min(sectionBottom - window.innerHeight + 50, maxScroll);
+          if (scrollTo < 0) scrollTo = 0;
+          window.scrollTo({ top: scrollTo, behavior: "smooth" });
         }
       }, 600); // подождать, пока исчезнет preloader
     }

@@ -38,32 +38,11 @@
     <link id="color-scheme" href="assets/css/colors/default.css" rel="stylesheet">
   </head>
   <body>
+    {% include "header.html" %}
     <main>
       <div class="page-loader">
         <div class="loader">Загрузка...</div>
       </div>
-      <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
-        <div class="container">
-          <div class="navbar-header">
-            <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#custom-collapse">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="index_mp_fullscreen_flexslider.html">Адвокат Садиков А.А.</a>
-          </div>
-          <div class="collapse navbar-collapse" id="custom-collapse">
-            <ul class="nav navbar-nav navbar-right">
-              <li><a href="index_mp_fullscreen_flexslider.html">Главная</a></li>
-              <li><a href="index_mp_fullscreen_flexslider.html#about">О нас</a></li>
-              <li><a href="index_mp_fullscreen_flexslider.html#services">Услуги</a></li>
-              <li><a href="index_mp_fullscreen_flexslider.html#works">Портфолио</a></li>
-              <li><a href="index_mp_fullscreen_flexslider.html#contact">Контакты</a></li>
-            </ul>                          
-          </div>
-        </div>
-      </nav>
       <div class="main">
         <section class="module bg-dark-60 portfolio-page-header" data-background="assets/images/portfolio/portfolio_header_bg.jpg">
           <div class="container">
@@ -122,26 +101,10 @@
           </div>
         </section>
         <hr class="divider-d">
-        <footer class="footer bg-dark">
-          <div class="container">
-            <div class="row">
-              <div class="col-sm-6">
-                <p class="copyright font-alt">&copy; 2025&nbsp;<a href="index.html">Садиков А.А.</a>, Все права защищены</p>
-              </div>
-              <div class="col-sm-6">
-                <div class="footer-social-links">
-                  <a href="https://vk.com/yourprofile" target="_blank" title="ВКонтакте"><i class="fa fa-vk"></i></a>
-                  <a href="https://t.me/yourtelegram" target="_blank" title="Telegram"><i class="fa fa-telegram"></i></a>
-                  <a href="mailto:advocate34@mail.ru" title="Email"><i class="fa fa-envelope"></i></a>
-                  <a href="https://wa.me/79178345017" target="_blank" title="WhatsApp"><i class="fa fa-whatsapp"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </footer>
       </div>
       <div class="scroll-up"><a href="#totop"><i class="fa fa-angle-double-up"></i></a></div>
     </main>
+    {% include "footer.html" %}
     <script src="assets/lib/jquery/dist/jquery.js"></script>
     <script src="assets/lib/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="assets/lib/wow/dist/wow.js"></script>
