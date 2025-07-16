@@ -173,47 +173,7 @@
               </div>
             </div>
           </div>
-          <ul class="works-grid works-grid-gut works-grid-3 works-hover-w" id="works-grid">
-            <li class="work-item patients"><a href="#">
-                <div class="work-image"><img src="assets/images/work-1.jpg" alt="Дело пациента"/></div>
-                <div class="work-caption font-alt">
-                  <h3 class="work-title">Взыскание компенсации за некачественное лечение</h3>
-                  <div class="work-descr">Пациентам</div>
-                </div></a></li>
-            <li class="work-item institutions">
-              <a href="portfolio_osp_otkaza.html">
-                <div class="work-image"><img src="assets/images/work-2.jpg" alt="Дело с мед. учреждением"/></div>
-                <div class="work-caption font-alt">
-                  <h3 class="work-title">Оспаривание отказа в предоставлении медицинской помощи</h3>
-                  <div class="work-descr">Мед. учреждения</div>
-                </div>
-              </a>
-            </li>
-            <li class="work-item doctors"><a href="#">
-                <div class="work-image"><img src="assets/images/work-3.jpg" alt="Дело врача"/></div>
-                <div class="work-caption font-alt">
-                  <h3 class="work-title">Защита врача при дисциплинарном разбирательстве</h3>
-                  <div class="work-descr">Врачам</div>
-                </div></a></li>
-            <li class="work-item patients"><a href="#">
-                <div class="work-image"><img src="assets/images/work-4.jpg" alt="Дело пациента"/></div>
-                <div class="work-caption font-alt">
-                  <h3 class="work-title">Взыскание морального вреда</h3>
-                  <div class="work-descr">Пациентам</div>
-                </div></a></li>
-            <li class="work-item institutions"><a href="#">
-                <div class="work-image"><img src="assets/images/work-5.jpg" alt="Дело с мед. учреждением"/></div>
-                <div class="work-caption font-alt">
-                  <h3 class="work-title">Сопровождение спора с частной клиникой</h3>
-                  <div class="work-descr">Мед. учреждения</div>
-                </div></a></li>
-            <li class="work-item doctors"><a href="#">
-                <div class="work-image"><img src="assets/images/work-6.jpg" alt="Дело врача"/></div>
-                <div class="work-caption font-alt">
-                  <h3 class="work-title">Консультация врача по вопросам медицинского права</h3>
-                  <div class="work-descr">Врачам</div>
-                </div></a></li>
-          </ul>
+          {% include "portfolio_cards_block.html" %}
         </section>
         <hr class="divider-w">
         <section class="module" id="contact">
@@ -243,18 +203,7 @@
       <div class="scroll-up"><a href="#totop"><i class="fa fa-angle-double-up"></i></a></div>
     </main>
     {% include "footer.html" %}
-    <script src="assets/lib/jquery/dist/jquery.js"></script>
-    <script src="assets/lib/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="assets/lib/wow/dist/wow.js"></script>
-    <script src="assets/lib/jquery.mb.ytplayer/dist/jquery.mb.YTPlayer.js"></script>
-    <script src="assets/lib/isotope/dist/isotope.pkgd.js"></script>
-    <script src="assets/lib/imagesloaded/imagesloaded.pkgd.js"></script>
-    <script src="assets/lib/flexslider/jquery.flexslider.js"></script>
-    <script src="assets/lib/owl.carousel/dist/owl.carousel.min.js"></script>
-    <script src="assets/lib/smoothscroll.js"></script>
-    <script src="assets/lib/magnific-popup/dist/jquery.magnific-popup.js"></script>
-    <script src="assets/lib/simple-text-rotator/jquery.simple-text-rotator.min.js"></script>
-    <script src="assets/js/plugins.js"></script>
-    <script src="assets/js/main.js"></script>
+    {% include "chatbot_widget.html" %}
+    {% include "scripts.html" %}
   </body>
 </html>

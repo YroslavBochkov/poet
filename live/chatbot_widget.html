@@ -1,0 +1,241 @@
+<!-- Чат-бот виджет -->
+<style>
+  #chatbot-widget {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 320px;
+    max-width: 90vw;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.18);
+    z-index: 9999;
+    font-family: 'Open Sans', Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  #chatbot-header {
+    background: #222;
+    color: #fff;
+    padding: 12px 16px;
+    font-weight: bold;
+    font-size: 16px;
+  }
+  #chatbot-messages {
+    flex: 1;
+    padding: 12px;
+    overflow-y: auto;
+    font-size: 15px;
+    background: #f7f7f7;
+    min-height: 120px;
+    max-height: 260px;
+  }
+  .chatbot-msg {
+    margin-bottom: 8px;
+    line-height: 1.4;
+  }
+  .chatbot-msg.user {
+    text-align: right;
+    color: #1a237e;
+  }
+  .chatbot-msg.bot {
+    text-align: left;
+    color: #222;
+  }
+  .chatbot-options {
+    margin: 8px 0 8px 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+  .chatbot-option-btn {
+    background: #e3e7f7;
+    color: #1a237e;
+    border: 1px solid #bfcbe6;
+    border-radius: 16px;
+    padding: 4px 12px;
+    font-size: 14px;
+    cursor: pointer;
+    margin: 2px 4px 2px 0;
+    transition: background 0.2s;
+  }
+  .chatbot-option-btn:hover {
+    background: #d1d9f0;
+  }
+  #chatbot-form {
+    display: flex;
+    border-top: 1px solid #eee;
+    background: #fff;
+  }
+  #chatbot-input {
+    flex: 1;
+    border: none;
+    padding: 10px;
+    font-size: 15px;
+    outline: none;
+    background: #fff;
+  }
+  #chatbot-send {
+    background: #222;
+    color: #fff;
+    border: none;
+    padding: 0 18px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  #chatbot-send:hover {
+    background: #444;
+  }
+  #chatbot-toggle {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 9998;
+    background: #222;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 56px;
+    height: 56px;
+    font-size: 28px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+</style>
+<div id="chatbot-widget" style="display:none;">
+  <div id="chatbot-header">
+    <span>Юридический чат-бот</span>
+    <span style="float:right; cursor:pointer;" onclick="document.getElementById('chatbot-widget').style.display='none';document.getElementById('chatbot-toggle').style.display='flex';">&times;</span>
+  </div>
+  <div id="chatbot-messages"></div>
+  <form id="chatbot-form" autocomplete="off">
+    <input id="chatbot-input" type="text" placeholder="Ваш вопрос..." required />
+    <button id="chatbot-send" type="submit">&#9658;</button>
+  </form>
+</div>
+<button id="chatbot-toggle" title="Открыть чат" style="display:flex;" onclick="document.getElementById('chatbot-widget').style.display='flex';this.style.display='none';">&#128172;</button>
+<script>
+  // Открыть чат автоматически на мобильных устройствах
+  if(window.innerWidth < 600) {
+    document.getElementById('chatbot-toggle').style.display = 'flex';
+  }
+  // Логика чата
+  const chatbotWidget = document.getElementById('chatbot-widget');
+  const chatbotMessages = document.getElementById('chatbot-messages');
+  const chatbotForm = document.getElementById('chatbot-form');
+  const chatbotInput = document.getElementById('chatbot-input');
+
+  function addMsg(text, sender, options) {
+    const msg = document.createElement('div');
+    msg.className = 'chatbot-msg ' + sender;
+    msg.innerText = text;
+    chatbotMessages.appendChild(msg);
+
+    // Если есть варианты ответов — показываем кнопки
+    if (options && Array.isArray(options) && options.length > 0) {
+      const btnWrap = document.createElement('div');
+      btnWrap.className = 'chatbot-options';
+      options.forEach(opt => {
+        // Специальная обработка для кнопок "Позвонить для записи" и "Написать в WhatsApp"
+        if (opt === "Позвонить для записи") {
+          const a = document.createElement('a');
+          a.href = "tel:+79178345017";
+          a.target = "_blank";
+          a.className = 'chatbot-option-btn';
+          a.innerText = opt;
+          btnWrap.appendChild(a);
+        } else if (opt === "Написать в WhatsApp") {
+          const a = document.createElement('a');
+          a.href = "https://wa.me/79178345017";
+          a.target = "_blank";
+          a.className = 'chatbot-option-btn';
+          a.innerText = opt;
+          btnWrap.appendChild(a);
+        } else {
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = 'chatbot-option-btn';
+          btn.innerText = opt;
+          btn.onclick = function() {
+            addMsg(opt, 'user');
+            chatbotInput.value = '';
+            sendToBot(opt);
+          };
+          btnWrap.appendChild(btn);
+        }
+      });
+      chatbotMessages.appendChild(btnWrap);
+    }
+
+    chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+  }
+
+   // Приветствие
+   function chatbotGreet() {
+    // Очищаем историю сообщений
+    chatbotMessages.innerHTML = '';
+    // Сбросим поле ввода
+    chatbotInput.value = '';
+    // Сбросить сессию на сервере и сразу показать приветствие
+    fetch('/chatbot_reset', {method: 'POST'}).then(() => {
+      sendToBot('');
+    });
+  }
+
+  // Функция отправки сообщения на backend
+  function sendToBot(text) {
+    fetch('/chatbot', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({message: text})
+    })
+    .then(r => r.json())
+    .then(data => {
+      // Если backend вернул флаг закрытия чата — прощаемся и закрываем окно
+      if (data.close_chat) {
+        addMsg(data.response, 'bot');
+        setTimeout(function() {
+          document.getElementById('chatbot-widget').style.display = 'none';
+          document.getElementById('chatbot-toggle').style.display = 'flex';
+        }, 1200);
+        return;
+      }
+      // Если backend вернул варианты ответов — показываем их
+      if (data.options) {
+        addMsg(data.response, 'bot', data.options);
+      } else {
+        addMsg(data.response, 'bot');
+      }
+    })
+    .catch(() => {
+      addMsg('Ошибка соединения с сервером. Попробуйте позже.', 'bot');
+    });
+  }
+
+  // Показать приветствие при открытии
+  document.getElementById('chatbot-toggle').addEventListener('click', function() {
+    chatbotWidget.style.display = 'flex';
+    this.style.display = 'none';
+    chatbotGreet();
+  });
+
+  // Автоматически показать приветствие, если чат открыт по умолчанию (например, после обновления)
+  if (chatbotWidget.style.display !== 'none') {
+    chatbotGreet();
+  }
+
+  // Отправка сообщения
+  chatbotForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    const text = chatbotInput.value.trim();
+    if(!text) return;
+    addMsg(text, 'user');
+    chatbotInput.value = '';
+    sendToBot(text);
+  });
+</script>

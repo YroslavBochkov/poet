@@ -1,0 +1,56 @@
+{% set portfolio_cards = [
+    {
+      "category": "patients",
+      "url": "portfolio_patient_compensation.html",
+      "image": "assets/images/work-1.jpg",
+      "alt": "Дело пациента",
+      "title": "Взыскание компенсации за некачественное лечение",
+      "descr": "Пациентам"
+    },
+    {
+      "category": "institutions",
+      "url": "portfolio_osp_otkaza.html",
+      "image": "assets/images/work-2.jpg",
+      "alt": "Дело с мед. учреждением",
+      "title": "Оспаривание отказа в предоставлении медицинской помощи",
+      "descr": "Мед. учреждения"
+    },
+    {
+      "category": "doctors",
+      "url": "portfolio_doctor_defense.html",
+      "image": "assets/images/work-3.jpg",
+      "alt": "Дело врача",
+      "title": "Защита врача при дисциплинарном разбирательстве",
+      "descr": "Врачам"
+    },
+    {
+      "category": "patients",
+      "url": "portfolio_patient_moral.html",
+      "image": "assets/images/work-4.jpg",
+      "alt": "Дело пациента",
+      "title": "Взыскание морального вреда",
+      "descr": "Пациентам"
+    },
+    {
+      "category": "institutions",
+      "url": "portfolio_soprovod_s_chstnoi.html",
+      "image": "assets/images/work-5.jpg",
+      "alt": "Дело с мед. учреждением",
+      "title": "Сопровождение спора с частной клиникой",
+      "descr": "Мед. учреждения"
+    },
+    {
+      "category": "doctors",
+      "url": "portfolio_doctor_consult.html",
+      "image": "assets/images/work-6.jpg",
+      "alt": "Дело врача",
+      "title": "Консультация врача по вопросам медицинского права",
+      "descr": "Врачам"
+    }
+  ] %}
+  <ul class="works-grid works-grid-gut works-grid-3 works-hover-w" id="works-grid">
+    {% for card in portfolio_cards %}
+      {% include "portfolio_card.html" %}
+    {% endfor %}
+  </ul>
+  
