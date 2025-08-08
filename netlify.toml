@@ -4,12 +4,12 @@
 
 [[redirects]]
   from = "/chatbot"
-  to = "https://ВАШ-БЭКЕНД.onrender.com/chatbot"
+  to = "https://poet-dzal.onrender.com/chatbot"
   status = 200
   force = true
 
 [[redirects]]
   from = "/chatbot_reset"
-  to = "https://ВАШ-БЭКЕНД.onrender.com/chatbot_reset"
+  to = "https://poet-dzal.onrender.com/chatbot_reset"
   status = 200
   force = true
