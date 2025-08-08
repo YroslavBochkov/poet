@@ -1,5 +1,5 @@
 [build]
-  publish = "live"
+  publish = "live_build"
   command = ""
 
 [[redirects]]
