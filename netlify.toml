@@ -1,0 +1,15 @@
+[build]
+  publish = "live"
+  command = ""
+
+[[redirects]]
+  from = "/chatbot"
+  to = "https://ВАШ-БЭКЕНД.onrender.com/chatbot"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/chatbot_reset"
+  to = "https://ВАШ-БЭКЕНД.onrender.com/chatbot_reset"
+  status = 200
+  force = true
