@@ -101,6 +101,11 @@ def build_static_site():
                     rendered = template.render()
                 with open(dst_path, "w", encoding="utf-8") as f:
                     f.write(rendered)
+    # Переименовать index_mp_fullscreen_flexslider.html в index.html
+    src_index = os.path.join(DST_DIR, "index_mp_fullscreen_flexslider.html")
+    dst_index = os.path.join(DST_DIR, "index.html")
+    if os.path.exists(src_index):
+        os.replace(src_index, dst_index)
     print(f"Статический сайт собран в папке: {DST_DIR}")
 
 

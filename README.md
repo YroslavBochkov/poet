@@ -75,6 +75,6 @@ python app.py
 <a href="https://git-scm.com/"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" height="32" alt="Git"/></a>
 
 
-Не забудьте защитить .env и другие чувствительные файлы.
+Не забудьте защитить .env и др
 
 **Автор:** [Ярослав Бочков](https://github.com/YroslavBochkov)
