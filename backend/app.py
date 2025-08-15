@@ -247,8 +247,9 @@ def chatbot():
 
 
 @app.route("/")
+@app.route("/index.html")
 def index():
-    return render_template("index_mp_fullscreen_flexslider.html")
+    return render_template("index.html")
 
 
 @app.route("/<page>")
@@ -280,5 +281,5 @@ def page_not_found(e):
     return render_template("404.html"), 404
 
 
-# if __name__ == "__main__":
-    # app.run(debug=False)
+if __name__ == "__main__":
+    app.run(debug=False)
